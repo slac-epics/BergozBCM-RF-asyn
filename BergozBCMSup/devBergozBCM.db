@@ -1,0 +1,113 @@
+#
+# This file is part of Bergoz BCM EPICS device support. It is subject to
+# the license terms in the LICENSE.txt file found in the top-level directory
+# of this distribution and at:
+#    https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
+# No part of Bergoz BCM EPICS device support, including this file, may be
+# copied, modified, propagated, or distributed except according to the terms
+# contained in the LICENSE.txt file.
+#
+
+record(longin, "$(P)$(R)ADC:Rd")
+{
+    field(DESC, "Sampled ADC value")
+    field(DTYP, "stream")
+    field(INP,  "@devBergozBCM.proto getAdc $(PORT) $(A)")
+    field (SCAN, "I/O Intr")
+}
+
+record(longin, "$(P)$(R)SERIALNUM:Rd")
+{
+    field(DESC, "BERGOZ serial number")
+    field(DTYP, "stream")
+    field(INP,  "@devBergozBCM.proto getSerial $(PORT) $(A)")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P)$(R)DELAY:Rd")
+{
+    field(DESC, "Get digital delay value")
+    field(DTYP, "stream")
+    field(INP,  "@devBergozBCM.proto getDelay $(PORT) $(A)")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout, "$(P)$(R)DELAY:St")
+{
+    field(DESC, "Set digital delay value")
+    field(DTYP, "stream")
+    field(OUT,  "@devBergozBCM.proto setDelay $(PORT) $(A)")
+    field(SCAN, "Passive")
+}
+
+record(longin, "$(P)$(R)REVERSE:Rd")
+{
+    field(DESC, "Is reverse func activated")
+    field(DTYP, "stream")
+    field(INP,  "@devBergozBCM.proto getReverse $(PORT) $(A)")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P)$(R)SWITCHES:Rd")
+{
+    field(DESC, "Get switches position")
+    field(DTYP, "stream")
+    field(INP,  "@devBergozBCM.proto getSwitches $(PORT) $(A)")
+    field(SCAN, "I/O Intr")
+}
+
+record(longout, "$(P)$(R)SWITCHES:St")
+{
+    field(DESC, "Set switches position")
+    field(DTYP, "stream")
+    field(OUT,  "@devBergozBCM.proto setSwitches $(PORT) $(A)")
+    field(SCAN, "Passive")
+}
+
+record(longin, "$(P)$(R)AVGPOINTS:Rd")
+{
+    field(DESC, "average number of points")
+    field(DTYP, "stream")
+    field(INP,  "@devBergozBCM.proto getAvgPoints $(PORT) $(A)")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P)$(R)QCALHI:Rd")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devBergozBCM.proto getQcalHi $(PORT) $(A)")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P)$(R)QCALLO:Rd")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devBergozBCM.proto getQcalLo $(PORT) $(A)")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P)$(R)UCALHI:Rd")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devBergozBCM.proto getUcalHi $(PORT) $(A)")
+    field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P)$(R)UCALLO:Rd")
+{
+    field(DTYP, "stream")
+    field(INP,  "@devBergozBCM.proto getUcalLo $(PORT) $(A)")
+    field(SCAN, "I/O Intr")
+}
+
+record(ai, "$(P)$(R)CCAL:Rd")
+{
+#   from BERGOZ (aka Qcal)
+    field(VAL, "0.01289")
+}
+
+record(ai, "$(P)$(R)VCAL:Rd")
+{
+#   from BERGOZ (aka Ucal)
+    field(VAL, "0.87282")
+}

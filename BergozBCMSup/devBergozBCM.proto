@@ -1,0 +1,126 @@
+#
+# This file is part of Bergoz BCM-RF EPICS device support. It is subject to
+# the license terms in the LICENSE.txt file found in the top-level directory
+# of this distribution and at:
+#    https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
+# No part of Bergoz BCM-RF EPICS device support, including this file, may be
+# copied, modified, propagated, or distributed except according to the terms
+# contained in the LICENSE.txt file.
+#
+
+Terminator = NL NUL;
+
+#
+# A0: Read ADC sampled value.
+# Unsolicited data. Use I/O Intr processing.
+#
+# Reply:   A0:0000=0024BE7B
+#
+getAdc {
+  in "A0:%*4X=00%6X";
+}
+
+#
+# S0: Read BERGOZ serial number
+#
+# Command: S0?\n\000
+# Reply:   S0:0000=00000028\n\000
+#
+
+getSerial {
+  in "S0:%*4X=%8X";
+  @init { out "S0?"; }
+}
+
+#
+# D0: Read digital delay value
+#
+# Command: D0?\n\000
+# Reply:   D0:0000=00000000\n\000
+#
+
+getDelay {
+  in "D0:%*4X=%8X";
+  @init { out "D0?"; }
+}
+
+setDelay {
+  out "D0:00%02X";
+  out "D0?";
+}
+
+#
+# M0: Is reverse function activated
+#
+# Command: M0?\n\000
+# Reply:   M0:0000=00000000\n\000
+#
+
+getReverse {
+  in "M0:%*4X=%8X";
+  @init { out "M0?"; }
+}
+
+#
+# I0: Switches position
+#
+# Command: I0?\n\000
+# Reply:   I0:0000=00000007\n\000
+#
+
+getSwitches {
+  in "I0:%*4X=%8X";
+  @init { out "I0?"; }
+}
+
+setSwitches {
+  out "I0:00%02X";
+  out "I0?";
+}
+
+#
+# T0: Average number of points for ADC
+#
+# Command: T0?\n\000
+# Reply:   T0:0000=00000001\n\000
+#
+
+getAvgPoints {
+  in "T0:%*4X=%8X";
+  @init { out "T0?"; }
+}
+
+#
+# V0: Calibration constant Qcal (2 bytes low)
+# V1: Calibration constant Qcal (2 bytes high)
+#
+# Command: V1?\n\000
+# Reply:   V1:0000=00003094\n\000V0:0000=00003C53\n\000
+#
+
+getQcalLo {
+  in "V0:%*4X=%8X";
+}
+
+getQcalHi {
+  in "V1:%*4X=%8X";
+  @init { out "V1?"; }
+}
+
+#
+# W0: Calibration constant Ucal (2 bytes low)
+# W1: Calibration constant Ucal (2 bytes high)
+#
+# Command: W1?\n\000
+# Reply:   W1:0000=00007122\n\000W0:0000=00003F5F\n\000
+#
+
+getUcalLo {
+  in "W0:%*4X=%8X";
+}
+
+getUcalHi {
+  in "W1:%*4X=%8X";
+  @init { out "W1?"; }
+}
+
