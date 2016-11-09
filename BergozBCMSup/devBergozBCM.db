@@ -1,9 +1,9 @@
 #
-# This file is part of Bergoz BCM EPICS device support. It is subject to
+# This file is part of Bergoz BCM-RF EPICS device support. It is subject to
 # the license terms in the LICENSE.txt file found in the top-level directory
 # of this distribution and at:
 #    https://confluence.slac.stanford.edu/display/ppareg/LICENSE.html.
-# No part of Bergoz BCM EPICS device support, including this file, may be
+# No part of Bergoz BCM-RF EPICS device support, including this file, may be
 # copied, modified, propagated, or distributed except according to the terms
 # contained in the LICENSE.txt file.
 #
@@ -103,11 +103,13 @@ record(longin, "$(P)$(R)UCALLO:Rd")
 record(ai, "$(P)$(R)CCAL:Rd")
 {
 #   from BERGOZ (aka Qcal)
-    field(VAL, "0.01289")
+    field(INP, "0.01289")
+    field(PINI, "YES")
 }
 
 record(ai, "$(P)$(R)VCAL:Rd")
 {
 #   from BERGOZ (aka Ucal)
-    field(VAL, "0.87282")
+    field(INP, "0.87282")
+    field(PINI, "YES")
 }
