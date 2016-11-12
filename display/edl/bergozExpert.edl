@@ -3,8 +3,8 @@ beginScreenProperties
 major 4
 minor 0
 release 1
-x 1978
-y 604
+x 2788
+y 654
 w 621
 h 525
 font "helvetica-medium-r-18.0"
@@ -28,7 +28,7 @@ beginObjectProperties
 major 4
 minor 1
 release 1
-x 190
+x 180
 y 20
 w 148
 h 21
@@ -84,7 +84,7 @@ x 420
 y 470
 w 156
 h 20
-controlPv "$(prefix):SWITCHES:Rd"
+controlPv "$(prefix):SWITCHES_RD"
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -108,7 +108,7 @@ x 210
 y 470
 w 170
 h 24
-controlPv "$(prefix):SWITCHES:St"
+controlPv "$(prefix):SWITCHES_WR"
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -198,7 +198,7 @@ x 420
 y 90
 w 156
 h 20
-controlPv "$(prefix):ADC:Rd"
+controlPv "$(prefix):ADC_RD"
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -262,7 +262,7 @@ x 420
 y 120
 w 156
 h 20
-controlPv "$(prefix):SERIALNUM:Rd"
+controlPv "$(prefix):SERIALNUM_RD"
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -299,7 +299,7 @@ x 420
 y 440
 w 156
 h 20
-controlPv "$(prefix):DELAY:Rd"
+controlPv "$(prefix):DELAY_RD"
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -323,7 +323,7 @@ x 210
 y 440
 w 170
 h 24
-controlPv "$(prefix):DELAY:St"
+controlPv "$(prefix):DELAY_WR"
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -412,14 +412,14 @@ minor 1
 release 1
 x 30
 y 210
-w 158
+w 157
 h 20
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Qcal (2 bytes high)"
+  "Ccal (2 bytes high)"
 }
 autoSize
 endObjectProperties
@@ -432,34 +432,14 @@ minor 1
 release 1
 x 30
 y 240
-w 152
+w 151
 h 20
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Qcal (2 bytes low)"
-}
-autoSize
-endObjectProperties
-
-# (Static Text)
-object activeXTextClass
-beginObjectProperties
-major 4
-minor 1
-release 1
-x 30
-y 270
-w 157
-h 20
-font "helvetica-medium-r-18.0"
-fgColor index 14
-bgColor index 0
-useDisplayBg
-value {
-  "Ucal (2 bytes high)"
+  "Ccal (2 bytes low)"
 }
 autoSize
 endObjectProperties
@@ -472,14 +452,14 @@ minor 1
 release 1
 x 30
 y 300
-w 151
+w 156
 h 20
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
 useDisplayBg
 value {
-  "Ucal (2 bytes low)"
+  "Vcal (2 bytes high)"
 }
 autoSize
 endObjectProperties
@@ -492,6 +472,26 @@ minor 1
 release 1
 x 30
 y 330
+w 150
+h 20
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "Vcal (2 bytes low)"
+}
+autoSize
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 270
 w 39
 h 20
 font "helvetica-medium-r-18.0"
@@ -534,7 +534,7 @@ x 420
 y 150
 w 156
 h 20
-controlPv "$(prefix):AVGPOINTS:Rd"
+controlPv "$(prefix):AVGPOINTS_RD"
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -558,7 +558,7 @@ x 420
 y 360
 w 156
 h 20
-controlPv "$(prefix):VCAL:Rd"
+controlPv "$(prefix):VCAL_RD"
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -578,10 +578,10 @@ major 4
 minor 7
 release 0
 x 420
-y 330
+y 270
 w 156
 h 20
-controlPv "$(prefix):CCAL:Rd"
+controlPv "$(prefix):CCAL_RD"
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -604,7 +604,7 @@ x 420
 y 180
 w 156
 h 20
-controlPv "$(prefix):REVERSE:Rd"
+controlPv "$(prefix):REVERSE_RD"
 font "helvetica-medium-r-18.0"
 fgColor index 14
 bgColor index 0
@@ -628,10 +628,10 @@ x 420
 y 210
 w 156
 h 20
-controlPv "$(prefix):QCALHI:Rd"
+controlPv "$(prefix):CCALHI_RD"
 format "hex"
 font "helvetica-medium-r-18.0"
-fgColor index 14
+fgColor index 12
 bgColor index 0
 useDisplayBg
 autoHeight
@@ -653,10 +653,10 @@ x 420
 y 240
 w 156
 h 20
-controlPv "$(prefix):QCALLO:Rd"
+controlPv "$(prefix):CCALLO_RD"
 format "hex"
 font "helvetica-medium-r-18.0"
-fgColor index 14
+fgColor index 12
 bgColor index 0
 useDisplayBg
 autoHeight
@@ -675,13 +675,13 @@ major 4
 minor 7
 release 0
 x 420
-y 270
+y 300
 w 156
 h 20
-controlPv "$(prefix):UCALHI:Rd"
+controlPv "$(prefix):VCALHI_RD"
 format "hex"
 font "helvetica-medium-r-18.0"
-fgColor index 14
+fgColor index 12
 bgColor index 0
 useDisplayBg
 autoHeight
@@ -700,13 +700,13 @@ major 4
 minor 7
 release 0
 x 420
-y 300
+y 330
 w 156
 h 20
-controlPv "$(prefix):UCALLO:Rd"
+controlPv "$(prefix):VCALLO_RD"
 format "hex"
 font "helvetica-medium-r-18.0"
-fgColor index 14
+fgColor index 12
 bgColor index 0
 useDisplayBg
 autoHeight
@@ -734,6 +734,44 @@ bgColor index 0
 useDisplayBg
 value {
   "Readback"
+}
+autoSize
+endObjectProperties
+
+# (Text Update)
+object TextupdateClass
+beginObjectProperties
+major 10
+minor 0
+release 0
+x 80
+y 60
+w 190
+h 20
+controlPv "$(prefix):TTY_RD"
+fgColor index 14
+fgAlarm
+bgColor index 4
+fill
+font "courier-medium-r-14.0"
+endObjectProperties
+
+# (Static Text)
+object activeXTextClass
+beginObjectProperties
+major 4
+minor 1
+release 1
+x 30
+y 60
+w 37
+h 20
+font "helvetica-medium-r-18.0"
+fgColor index 14
+bgColor index 0
+useDisplayBg
+value {
+  "TTY"
 }
 autoSize
 endObjectProperties

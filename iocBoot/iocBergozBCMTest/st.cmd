@@ -3,7 +3,9 @@
 ###############################################################################
 # Set up environment
 epicsEnvSet("P","$(P=BCM:)")
-epicsEnvSet "TTY" "$(TTY=/dev/ttyACM0)"
+epicsEnvSet("R","$(R=0:)")
+epicsEnvSet("PORT","$(PORT=L0)")
+epicsEnvSet("BERGOZ_TTY","$(BERGOZ_TTY=/dev/ttyACM0)")
 
 < envPaths
 epicsEnvSet("STREAM_PROTOCOL_PATH","${TOP}/db")
@@ -17,16 +19,19 @@ BergozBCMTest_registerRecordDeviceDriver pdbbase
 ###############################################################################
 # Set up ASYN ports
 # drvAsynIPPortConfigure port ipInfo priority noAutoconnect noProcessEos
-drvAsynSerialPortConfigure("L0","$(TTY)",0,0,0)
-asynSetTraceIOMask("L0",-1,0x2)
-asynSetTraceMask("L0",-1,0x9)
+drvAsynSerialPortConfigure("$(PORT)","$(BERGOZ_TTY)",0,0,0)
+asynSetTraceIOMask("$(PORT)",-1,0x2)
+asynSetTraceMask("$(PORT)",-1,0x9)
 
 ###############################################################################
 # Load record instances
-dbLoadRecords "db/devBergozBCM.db" "P=$(P),R=1:,PORT=L0,A=-1"
-dbLoadRecords "db/asynRecord.db" "P=$(P),R=asyn,PORT=L0,ADDR=-1,OMAX=0,IMAX=0"
+dbLoadRecords "db/devBergozBCM.db" "P=$(P),R=$(R),PORT=$(PORT),A=-1"
+dbLoadRecords "db/asynRecord.db" "P=$(P),R=asyn,PORT=$(PORT),ADDR=-1,OMAX=0,IMAX=0"
 
 ###############################################################################
 # Start IOC
 cd "iocBoot/${IOC}"
 iocInit
+
+# Save the TTY device name
+dbpf $(P)$(R)TTY_RD $(BERGOZ_TTY)

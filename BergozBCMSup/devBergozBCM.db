@@ -8,7 +8,7 @@
 # contained in the LICENSE.txt file.
 #
 
-record(longin, "$(P)$(R)ADC:Rd")
+record(longin, "$(P)$(R)ADC_RD")
 {
     field(DESC, "Sampled ADC value")
     field(DTYP, "stream")
@@ -16,7 +16,7 @@ record(longin, "$(P)$(R)ADC:Rd")
     field (SCAN, "I/O Intr")
 }
 
-record(longin, "$(P)$(R)SERIALNUM:Rd")
+record(longin, "$(P)$(R)SERIALNUM_RD")
 {
     field(DESC, "BERGOZ serial number")
     field(DTYP, "stream")
@@ -24,7 +24,7 @@ record(longin, "$(P)$(R)SERIALNUM:Rd")
     field(SCAN, "I/O Intr")
 }
 
-record(longin, "$(P)$(R)DELAY:Rd")
+record(longin, "$(P)$(R)DELAY_RD")
 {
     field(DESC, "Get digital delay value")
     field(DTYP, "stream")
@@ -32,7 +32,7 @@ record(longin, "$(P)$(R)DELAY:Rd")
     field(SCAN, "I/O Intr")
 }
 
-record(longout, "$(P)$(R)DELAY:St")
+record(longout, "$(P)$(R)DELAY_WR")
 {
     field(DESC, "Set digital delay value")
     field(DTYP, "stream")
@@ -40,7 +40,7 @@ record(longout, "$(P)$(R)DELAY:St")
     field(SCAN, "Passive")
 }
 
-record(longin, "$(P)$(R)REVERSE:Rd")
+record(longin, "$(P)$(R)REVERSE_RD")
 {
     field(DESC, "Is reverse func activated")
     field(DTYP, "stream")
@@ -48,7 +48,7 @@ record(longin, "$(P)$(R)REVERSE:Rd")
     field(SCAN, "I/O Intr")
 }
 
-record(longin, "$(P)$(R)SWITCHES:Rd")
+record(longin, "$(P)$(R)SWITCHES_RD")
 {
     field(DESC, "Get switches position")
     field(DTYP, "stream")
@@ -56,7 +56,7 @@ record(longin, "$(P)$(R)SWITCHES:Rd")
     field(SCAN, "I/O Intr")
 }
 
-record(longout, "$(P)$(R)SWITCHES:St")
+record(longout, "$(P)$(R)SWITCHES_WR")
 {
     field(DESC, "Set switches position")
     field(DTYP, "stream")
@@ -64,7 +64,7 @@ record(longout, "$(P)$(R)SWITCHES:St")
     field(SCAN, "Passive")
 }
 
-record(longin, "$(P)$(R)AVGPOINTS:Rd")
+record(longin, "$(P)$(R)AVGPOINTS_RD")
 {
     field(DESC, "average number of points")
     field(DTYP, "stream")
@@ -72,44 +72,71 @@ record(longin, "$(P)$(R)AVGPOINTS:Rd")
     field(SCAN, "I/O Intr")
 }
 
-record(longin, "$(P)$(R)QCALHI:Rd")
+record(longin, "$(P)$(R)CCALHI_RD")
 {
     field(DTYP, "stream")
     field(INP,  "@devBergozBCM.proto getQcalHi $(PORT) $(A)")
     field(SCAN, "I/O Intr")
 }
 
-record(longin, "$(P)$(R)QCALLO:Rd")
+record(longin, "$(P)$(R)CCALLO_RD")
 {
     field(DTYP, "stream")
     field(INP,  "@devBergozBCM.proto getQcalLo $(PORT) $(A)")
     field(SCAN, "I/O Intr")
 }
 
-record(longin, "$(P)$(R)UCALHI:Rd")
+#
+# Convert to IEEE-754 32-bit float.
+# No INF/NAN, no denormalized numbers.
+#
+record(calc,"$(P)$(R)CCAL_RD") {
+    field(INPA, "$(P)$(R)CCALLO_RD CP MS")
+    field(INPB, "$(P)$(R)CCALHI_RD CP MS")
+    field(INPC, "0x8000")   # Hi word, sign bit
+    field(INPD, "0x7F80")   # Hi word, exponent mask
+    field(INPE, "0x00FF")   # Hi word, mantissa mask (incl hidden bit)
+    field(INPF, "150")      # Exponent offset plus 23-bit mantissa shift
+    field(INPG, "0x0080")   # Mantissa hidden bit
+    field(INPJ, "65536")    # Hi/Lo mantissa ratio
+    field(CALC, "(A&D?(A&C?-1:1):0)*((G|A&E)*J+B)*2^((A&D)/G-F)")
+    field(PREC, "5")
+    field(PINI, "YES")
+}
+
+record(longin, "$(P)$(R)VCALHI_RD")
 {
     field(DTYP, "stream")
     field(INP,  "@devBergozBCM.proto getUcalHi $(PORT) $(A)")
     field(SCAN, "I/O Intr")
 }
 
-record(longin, "$(P)$(R)UCALLO:Rd")
+record(longin, "$(P)$(R)VCALLO_RD")
 {
     field(DTYP, "stream")
     field(INP,  "@devBergozBCM.proto getUcalLo $(PORT) $(A)")
     field(SCAN, "I/O Intr")
 }
 
-record(ai, "$(P)$(R)CCAL:Rd")
-{
-#   from BERGOZ (aka Qcal)
-    field(INP, "0.01289")
+#
+# Convert to IEEE-754 32-bit float.
+# No INF/NAN, no denormalized numbers.
+#
+record(calc,"$(P)$(R)VCAL_RD") {
+    field(INPA, "$(P)$(R)VCALLO_RD CP MS")
+    field(INPB, "$(P)$(R)VCALHI_RD CP MS")
+    field(INPC, "0x8000")   # Hi word, sign bit
+    field(INPD, "0x7F80")   # Hi word, exponent mask
+    field(INPE, "0x00FF")   # Hi word, mantissa mask (incl hidden bit)
+    field(INPF, "150")      # Exponent offset plus 23-bit mantissa shift
+    field(INPG, "0x0080")   # Mantissa hidden bit
+    field(INPJ, "65536")    # Hi/Lo mantissa ratio
+    field(CALC, "(A&D?(A&C?-1:1):0)*((G|A&E)*J+B)*2^((A&D)/G-F)")
+    field(PREC, "5")
     field(PINI, "YES")
 }
 
-record(ai, "$(P)$(R)VCAL:Rd")
+record(stringin, "$(P)$(R)TTY_RD")
 {
-#   from BERGOZ (aka Ucal)
-    field(INP, "0.87282")
-    field(PINI, "YES")
+    field(DESC, "TTY device name")
 }
