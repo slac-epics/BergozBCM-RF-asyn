@@ -1,0 +1,71 @@
+File       : documentation/README
+Author     : Chris Ford <caf@slac.stanford.edu>
+Created    : 2016-11-14
+Last update: 2016-11-14
+
+Overview
+
+    This is an EPICS asyn StreamDevice driver for the Bergoz BCM-RF.
+
+    The StreamDevice protocol is described by the BergozBCMSup/devBergozBCM.proto file.
+
+    Source for an example IOC application is provided.  See the BergozBCMTestApp subdirectory.
+
+    Source for an example GUI is provided.  See the display/edl subdirectory.
+
+    See Bergoz's website for hardware info:
+    http://www.bergoz.com
+
+
+Record Descriptions
+
+    Record Name             Description
+    -----------------------+----------------------------------------------------------------------------------------------
+    $(P)$(R)ADC_RD          Read the sampled ADC value.
+    $(P)$(R)SERIALNUM_RD    Read the Bergoz serial number.
+    $(P)$(R)DELAY_RD        Read the digital delay value. 
+    $(P)$(R)DELAY_WR        Write the digital delay value. 
+    $(P)$(R)REVERSE_RD      Read if reverse function activated.
+    $(P)$(R)SWITCHES_RD     Read the on-board switches position.
+    $(P)$(R)SWITCHES_WR     Write the on-board switches position.
+    $(P)$(R)AVGPOINTS_RD    Read the average number of points for ADC.
+    $(P)$(R)CCALHI_RD       Read the Ccal (aka Qcal) 2 bytes high.
+    $(P)$(R)CCALLO_RD       Read the Ccal (aka Qcal) 2 bytes low.
+    $(P)$(R)CCAL_RD         Read the Ccal (aka Qcal) IEEE-754 32-bit float.
+    $(P)$(R)VCALHI_RD       Read the Vcal (aka Ucal) 2 bytes high.
+    $(P)$(R)VCALLO_RD       Read the Vcal (aka Ucal) 2 bytes low.
+    $(P)$(R)VCAL_RD         Read the Vcal (aka Ucal) IEEE-754 32-bit float.
+    $(P)$(R)TTY_RD          Get the TTY device name (set by application).
+
+
+Database Template Macro Requirements
+
+    Macro Name              Description
+    -----------------------+----------------------------------------------------------------------------------------------
+    $(P) and $(R)           These macros are concatenated to form the record name prefix.
+    $(PORT)                 Must match the port name passed to drvAsynSerialPortConfigure()
+                            (see Configuration Command, below).
+    $(A)                    Asyn address.  Set to -1.
+
+
+Configuration Command
+
+    This C function can be called directly or from iocsh:
+
+        int drvAsynSerialPortConfigure(const char *portName, const char *ttyName)
+
+    Example call:
+
+        drvAsynSerialPortConfigure("L0", "/dev/ttyACM0")
+
+
+EPICS Version Information
+
+    This driver was developed with the following EPICS version environment:
+
+        ASYN_MODULE_VERSION=asyn-R4-26_0
+        EPICS_BASE_VER=base-R3-14-12-4_1-1
+        EVENT_MODULE_VERSION=evrClient-R1-0-p4
+        MISCUTILS_MODULE_VERSION=miscUtils-R2-2-2
+
+    For updated version information see the RELEASE_NOTES file found in the top-level directory.
