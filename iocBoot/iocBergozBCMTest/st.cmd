@@ -6,6 +6,7 @@ epicsEnvSet("P","$(P=BCM:)")
 epicsEnvSet("R","$(R=0:)")
 epicsEnvSet("PORT","$(PORT=L0)")
 epicsEnvSet("BERGOZ_TTY","$(BERGOZ_TTY=/dev/ttyACM0)")
+epicsEnvSet("SERIALNUM_EXPECT","$(SERIALNUM_EXPECT=40)")
 
 < envPaths
 epicsEnvSet("STREAM_PROTOCOL_PATH","${TOP}/db")
@@ -35,3 +36,6 @@ iocInit
 
 # Save the TTY device name
 dbpf $(P)$(R)TTY_RD $(BERGOZ_TTY)
+
+# Save the expected BERGOZ serial number
+dbpf $(P)$(R)SERIALNUM_EXPECT $(SERIALNUM_EXPECT)

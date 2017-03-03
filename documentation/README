@@ -23,6 +23,10 @@ Record Descriptions
     -----------------------+----------------------------------------------------------------------------------------------
     $(P)$(R)ADC_RD          Read the sampled ADC value.
     $(P)$(R)SERIALNUM_RD    Read the Bergoz serial number.
+    $(P)$(R)CALC_SERIALNUM_HIGH Serial number Max Minor limit.
+    $(P)$(R)CALC_SERIALNUM_LOW  Serial number Min Minor limit.
+    $(P)$(R)SERIALNUM_EXPECT    Expected BERGOZ serial number.
+    $(P)$(R)SERIALNUM_UPDATE    Update BERGOZ serial number.
     $(P)$(R)DELAY_RD        Read the digital delay value. 
     $(P)$(R)DELAY_WR        Write the digital delay value. 
     $(P)$(R)REVERSE_RD      Read if reverse function activated.
@@ -65,7 +69,5 @@ EPICS Version Information
 
         ASYN_MODULE_VERSION=asyn-R4-26_0
         EPICS_BASE_VER=base-R3-14-12-4_1-1
-        EVENT_MODULE_VERSION=evrClient-R1-0-p4
-        MISCUTILS_MODULE_VERSION=miscUtils-R2-2-2
 
     For updated version information see the RELEASE_NOTES file found in the top-level directory.

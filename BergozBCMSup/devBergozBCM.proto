@@ -32,6 +32,10 @@ getSerial {
   @init { out "S0?"; }
 }
 
+updateSerial {
+  out "S0?";
+}
+
 #
 # D0: Read digital delay value
 #

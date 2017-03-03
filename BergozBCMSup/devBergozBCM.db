@@ -18,10 +18,20 @@ record(longin, "$(P)$(R)ADC_RD")
 
 record(longin, "$(P)$(R)SERIALNUM_RD")
 {
-    field(DESC, "BERGOZ serial number")
+    field(DESC, "Read BERGOZ serial number")
     field(DTYP, "stream")
     field(INP,  "@devBergozBCM.proto getSerial $(PORT) $(A)")
     field(SCAN, "I/O Intr")
+    field(HSV,  "MINOR")
+    field(LSV,  "MINOR")
+}
+
+record(longout, "$(P)$(R)SERIALNUM_UPDATE")
+{
+    field(DESC, "Update BERGOZ serial number")
+    field(DTYP, "stream")
+    field(OUT,  "@devBergozBCM.proto updateSerial $(PORT) $(A)")
+    field(SCAN, "Passive")
 }
 
 record(longin, "$(P)$(R)DELAY_RD")
@@ -140,3 +150,30 @@ record(stringin, "$(P)$(R)TTY_RD")
 {
     field(DESC, "TTY device name")
 }
+
+record(longin, "$(P)$(R)SERIALNUM_EXPECT")
+{
+    field(DESC, "Expected BERGOZ serial number")
+    field(FLNK, "$(P)$(R)CALC_SERIALNUM_LOW")
+}
+
+record(calcout, "$(P)$(R)CALC_SERIALNUM_LOW") {
+    field(DESC, "Serial number Min Minor limit")
+    field(PREC, "3")
+    field(INPA, "$(P)$(R)SERIALNUM_EXPECT.VAL  NPP NMS")
+    field(CALC, "A-1")
+    field(OUT,  "$(P)$(R)SERIALNUM_RD.LOW  NPP NMS")
+    field(SCAN, "Passive")
+    field(FLNK, "$(P)$(R)CALC_SERIALNUM_HIGH")
+}
+
+record(calcout, "$(P)$(R)CALC_SERIALNUM_HIGH") {
+    field(DESC, "Serial number Max Minor limit")
+    field(PREC, "3")
+    field(INPA, "$(P)$(R)SERIALNUM_EXPECT.VAL  NPP NMS")
+    field(CALC, "A+1")
+    field(OUT,  "$(P)$(R)SERIALNUM_RD.HIGH NPP NMS")
+    field(SCAN, "Passive")
+    field(FLNK, "$(P)$(R)SERIALNUM_UPDATE")
+}
+
