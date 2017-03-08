@@ -9,7 +9,7 @@ include $(TOP)/configure/CONFIG
 # EXTERNAL NON EPICS PACKAGES: USER INCLUDES AND LIBRARIES
 # ========================================================
 
-USR_INCLUDES += $(PCRE_INCLUDE)
+USR_INCLUDES += -I$(PCRE_INCLUDE)
 
 # ===================================
 # PATH TO THE EXTERNAL LIBRARIES

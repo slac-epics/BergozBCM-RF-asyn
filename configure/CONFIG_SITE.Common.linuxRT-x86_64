@@ -15,5 +15,7 @@
 # =========================================================================
 # Perl-compatible regular expression support
 # =========================================================================
-PCRE_INCLUDE = -I$(PACKAGE_SITE_TOP)/pcre/8.37/buildroot-2015.02-x86_64/include
-PCRE_LIB = $(PACKAGE_SITE_TOP)/pcre/8.37/buildroot-2015.02-x86_64/lib
+BR_VERSION=buildroot-2016.11.1-x86_64
+PCRE_TOP = $(PACKAGE_SITE_TOP)/pcre/8.37/$(BR_VERSION)
+PCRE_INCLUDE = $(PCRE_TOP)/include
+PCRE_LIB = $(PCRE_TOP)/lib

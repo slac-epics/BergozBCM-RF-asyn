@@ -1,3 +1,6 @@
+R1.2.0:
+    Changes for the new Git Workflow and EPICS Base R3.15.5
+
 BergozBCM-RF-asyn-R1-1-0:
 
                 Added support for comparing serial number to expected value.
