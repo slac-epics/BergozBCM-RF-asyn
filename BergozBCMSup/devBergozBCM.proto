@@ -29,7 +29,10 @@ getAdc {
 
 getSerial {
   in "S0:%*4X=%8X";
-  @init { out "S0?"; }
+  @init {
+    out "S0?";
+    in "S0:%*4X=%8X";
+  }
 }
 
 updateSerial {
@@ -45,7 +48,10 @@ updateSerial {
 
 getDelay {
   in "D0:%*4X=%8X";
-  @init { out "D0?"; }
+  @init {
+    out "D0?";
+    in "D0:%*4X=%8X";
+  }
 }
 
 setDelay {
@@ -62,7 +68,10 @@ setDelay {
 
 getReverse {
   in "M0:%*4X=%8X";
-  @init { out "M0?"; }
+  @init {
+    out "M0?";
+    in "M0:%*4X=%8X";
+  }
 }
 
 #
@@ -74,7 +83,10 @@ getReverse {
 
 getSwitches {
   in "I0:%*4X=%8X";
-  @init { out "I0?"; }
+  @init {
+    out "I0?";
+    in "I0:%*4X=%8X";
+  }
 }
 
 setSwitches {
@@ -91,7 +103,10 @@ setSwitches {
 
 getAvgPoints {
   in "T0:%*4X=%8X";
-  @init { out "T0?"; }
+  @init {
+    out "T0?";
+    in "T0:%*4X=%8X";
+  }
 }
 
 #
@@ -104,11 +119,24 @@ getAvgPoints {
 
 getQcalLo {
   in "V0:%*4X=%8X";
+  @init {
+    out "V1?";
+#   skip V1
+    in "V1:%*4X=%*8X";
+#   read V0
+    in "V0:%*4X=%8X";
+  }
 }
 
 getQcalHi {
   in "V1:%*4X=%8X";
-  @init { out "V1?"; }
+  @init {
+    out "V1?";
+#   read V1
+    in "V1:%*4X=%8X";
+#   skip V0
+    in "V0:%*4X=%*8X";
+  }
 }
 
 #
@@ -121,10 +149,22 @@ getQcalHi {
 
 getUcalLo {
   in "W0:%*4X=%8X";
+  @init {
+    out "W1?";
+#   skip W1
+    in "W1:%*4X=%*8X";
+#   read W0
+    in "W0:%*4X=%8X";
+  }
 }
 
 getUcalHi {
   in "W1:%*4X=%8X";
-  @init { out "W1?"; }
+  @init {
+    out "W1?";
+#   read W1
+    in "W1:%*4X=%8X";
+#   skip W0
+    in "W0:%*4X=%*8X";
+  }
 }
-
