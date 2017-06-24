@@ -1,4 +1,4 @@
-#!../../bin/linuxRT_glibc-x86_64/BergozBCMTest
+#!../../bin/linuxRT-x86_64/BergozBCMTest
 
 ###############################################################################
 # Set up environment
