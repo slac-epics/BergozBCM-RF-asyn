@@ -1,3 +1,6 @@
+R1.2.3:  02/12/2017 Carolina Bianchini
+	-Adding to autosave field: DELAY_WR and SWITCHES_WR
+
 R1.2.2:
     Bumped versions:
         asyn=R4.31-0.1.0
