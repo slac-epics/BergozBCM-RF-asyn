@@ -48,6 +48,7 @@ record(longout, "$(P)$(R)DELAY_WR")
     field(DTYP, "stream")
     field(OUT,  "@devBergozBCM.proto setDelay $(PORT) $(A)")
     field(SCAN, "Passive")
+    info(autosaveFields,"VAL")
 }
 
 record(longin, "$(P)$(R)REVERSE_RD")
@@ -72,6 +73,7 @@ record(longout, "$(P)$(R)SWITCHES_WR")
     field(DTYP, "stream")
     field(OUT,  "@devBergozBCM.proto setSwitches $(PORT) $(A)")
     field(SCAN, "Passive")
+    info(autosaveFields,"VAL")
 }
 
 record(longin, "$(P)$(R)AVGPOINTS_RD")

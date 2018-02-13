@@ -5,11 +5,8 @@
 #	BASE_MODULE_VERSION
 #	EPICS_MODULES 
 # from one of the following options
--include $(TOP)/../../RELEASE_SITE
+#-include $(TOP)/../../RELEASE_SITE
 -include $(TOP)/RELEASE_SITE
-
-# Check that EPICS_MODULES was defined in a RELEASE_SITE file
--include $(TOP)/../../RELEASE_SITE.check
 
 # ==========================================================
 # Define the version strings for all needed modules
@@ -39,7 +36,3 @@ STREAM=$(EPICS_MODULES)/streamdevice/$(STREAM_MODULE_VERSION)
 
 # Set EPICS_BASE last so it appears last in the DB, DBD, INCLUDE, and LIB search paths
 EPICS_BASE              = $(EPICS_SITE_TOP)/base/$(BASE_MODULE_VERSION)
-
-# Check for undefined EPICS_BASE
--include $(TOP)/../../EPICS_BASE.check
-
