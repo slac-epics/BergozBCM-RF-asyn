@@ -1,3 +1,6 @@
+R1.2.4:  feb/14/2017 Marcio Donadio
+         - Fixed RELEASE and RELEASE.local files
+
 R1.2.3:  02/12/2017 Carolina Bianchini
 	-Adding to autosave field: DELAY_WR and SWITCHES_WR
 
