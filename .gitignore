@@ -5,3 +5,5 @@ dbd
 include
 lib
 bin
+envPaths
+startup/
