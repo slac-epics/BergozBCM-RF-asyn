@@ -21,7 +21,6 @@
 # ==========================================================
 ASYN_MODULE_VERSION=R4.31-0.1.0
 STREAM_MODULE_VERSION=R2.7.7-0.2
-AUTOSAVE_MODULE_VERSION=R5.8-1.0.0
 
 # ==========================================================
 # Define module paths using pattern
@@ -31,7 +30,6 @@ AUTOSAVE_MODULE_VERSION=R5.8-1.0.0
 # ==========================================================
 ASYN=$(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
 STREAM=$(EPICS_MODULES)/streamdevice/$(STREAM_MODULE_VERSION)
-AUTOSAVE=$(EPICS_MODULES)/autosave/$(AUTOSAVE_MODULE_VERSION)
 
 # ============================================================
 #  Module Location
