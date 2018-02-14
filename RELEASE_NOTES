@@ -1,4 +1,7 @@
-R1.2.4:  feb/14/2017 Marcio Donadio
+R1.2.5:  feb/14/2018 Marcio Donadio
+         - Removing autosave from the module. This should be put in the IOC app
+
+R1.2.4:  feb/14/2018 Marcio Donadio
          - Fixed RELEASE and RELEASE.local files
 
 R1.2.3:  02/12/2017 Carolina Bianchini
