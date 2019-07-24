@@ -7,3 +7,4 @@ lib
 bin
 envPaths
 startup/
+build.log
