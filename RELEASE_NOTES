@@ -1,3 +1,7 @@
+R1.2.6:  jul/24/2019 Marcio Donadio
+         - Upgraded version of stream device.
+         - Added build.log to gitignore.
+
 R1.2.5:  feb/14/2018 Marcio Donadio
          - Removing autosave from the module. This should be put in the IOC app
 
