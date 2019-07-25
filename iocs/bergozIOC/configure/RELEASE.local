@@ -5,6 +5,7 @@
 #	BASE_MODULE_VERSION
 #	EPICS_MODULES 
 # from one of the following options
+-include $(TOP)/../../../../RELEASE_SITE
 -include $(TOP)/../../RELEASE_SITE
 -include $(TOP)/RELEASE_SITE
 
@@ -30,6 +31,7 @@ STREAM_MODULE_VERSION=R2.7.7-0.2
 # ==========================================================
 ASYN=$(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
 STREAMDEVICE=$(EPICS_MODULES)/streamdevice/R2.8.9-1.0.2
+BERGOZBCM_RF_ASYN=$(TOP)/../..
 
 # ============================================================
 #  Module Location

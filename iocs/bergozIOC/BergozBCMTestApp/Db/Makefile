@@ -11,6 +11,8 @@ include $(TOP)/configure/CONFIG
 # Create and install (or just install) into <top>/db
 # databases, templates, substitutions like this
 DB_INSTALLS += $(ASYN)/db/asynRecord.db
+DB_INSTALLS += $(BERGOZBCM_RF_ASYN)/db/devBergozBCM.db
+DB_INSTALLS += $(BERGOZBCM_RF_ASYN)/db/devBergozBCM.proto
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add
