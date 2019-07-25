@@ -19,8 +19,6 @@
 # Don't set your version to anything such as "test" that
 # could match a directory name.
 # ==========================================================
-ASYN_MODULE_VERSION=R4.31-0.1.0
-STREAM_MODULE_VERSION=R2.7.7-0.2
 
 # ==========================================================
 # Define module paths using pattern
@@ -28,8 +26,6 @@ STREAM_MODULE_VERSION=R2.7.7-0.2
 #  or
 # FOO = /Full/Path/To/Development/Version 
 # ==========================================================
-ASYN=$(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
-STREAMDEVICE=$(EPICS_MODULES)/streamdevice/R2.8.9-1.0.2
 
 # ============================================================
 #  Module Location
