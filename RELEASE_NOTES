@@ -1,3 +1,12 @@
+R2.0.0:  jul/24/2019 Marcio Donadio
+         - Database and protocol file changed to use 2 Asyn ports to the same
+           USB in order to separate trafic-from and trafic-to. Asyn was not
+           able to process so many receiving messages and the sending ended-up
+           in timeout.
+         - Module completely refactored to the Area Detector style, where the
+           IOC app example is detached from the module, so the module is kept
+           the simplest possible.
+
 R1.2.7:  jul/24/2019 Marcio Donadio
          - Upgraded version of stream device.
          - Added build.log to gitignore.
