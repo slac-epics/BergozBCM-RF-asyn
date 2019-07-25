@@ -21,6 +21,21 @@ getAdc {
 }
 
 #
+# Send command to read all parameters from Bergoz. These messages are sent by a
+# separate Asyn port while the reading Asyn port is taking care of the
+# unsolicited messages and the solicited requests below. All records will
+# receive them by the I/O Intr mechanism from stream device.
+readParms {
+  out "D0?";
+  out "S0?";
+  out "M0?";
+  out "I0?";
+  out "T0?";
+  out "V1?";
+  out "W1?";
+}
+
+#
 # S0: Read BERGOZ serial number
 #
 # Command: S0?\n\000
@@ -29,10 +44,6 @@ getAdc {
 
 getSerial {
   in "S0:%*4X=%8X";
-  @init {
-    out "S0?";
-    in "S0:%*4X=%8X";
-  }
 }
 
 updateSerial {
@@ -48,10 +59,6 @@ updateSerial {
 
 getDelay {
   in "D0:%*4X=%8X";
-  @init {
-    out "D0?";
-    in "D0:%*4X=%8X";
-  }
 }
 
 setDelay {
@@ -68,10 +75,6 @@ setDelay {
 
 getReverse {
   in "M0:%*4X=%8X";
-  @init {
-    out "M0?";
-    in "M0:%*4X=%8X";
-  }
 }
 
 #
@@ -83,10 +86,6 @@ getReverse {
 
 getSwitches {
   in "I0:%*4X=%8X";
-  @init {
-    out "I0?";
-    in "I0:%*4X=%8X";
-  }
 }
 
 setSwitches {
@@ -103,10 +102,6 @@ setSwitches {
 
 getAvgPoints {
   in "T0:%*4X=%8X";
-  @init {
-    out "T0?";
-    in "T0:%*4X=%8X";
-  }
 }
 
 #
@@ -119,24 +114,10 @@ getAvgPoints {
 
 getQcalLo {
   in "V0:%*4X=%8X";
-  @init {
-    out "V1?";
-#   skip V1
-    in "V1:%*4X=%*8X";
-#   read V0
-    in "V0:%*4X=%8X";
-  }
 }
 
 getQcalHi {
   in "V1:%*4X=%8X";
-  @init {
-    out "V1?";
-#   read V1
-    in "V1:%*4X=%8X";
-#   skip V0
-    in "V0:%*4X=%*8X";
-  }
 }
 
 #
@@ -149,22 +130,8 @@ getQcalHi {
 
 getUcalLo {
   in "W0:%*4X=%8X";
-  @init {
-    out "W1?";
-#   skip W1
-    in "W1:%*4X=%*8X";
-#   read W0
-    in "W0:%*4X=%8X";
-  }
 }
 
 getUcalHi {
   in "W1:%*4X=%8X";
-  @init {
-    out "W1?";
-#   read W1
-    in "W1:%*4X=%8X";
-#   skip W0
-    in "W0:%*4X=%*8X";
-  }
 }

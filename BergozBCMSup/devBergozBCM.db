@@ -8,19 +8,33 @@
 # contained in the LICENSE.txt file.
 #
 
+# We use 2 different Asyn ports associated with the same USB physical
+# interface. Under continuous mode with 1 MHz trigger, Bergoz sends too many
+# messages for being processed. So, when a write was requested, Asyn never
+# had time to really send the message, ending up in a timeout. Separating
+# between 2 Asyn ports solved the problem.
+
 record(longin, "$(P)$(R)ADC_RD")
 {
     field(DESC, "Sampled ADC value")
     field(DTYP, "stream")
-    field(INP,  "@devBergozBCM.proto getAdc $(PORT) $(A)")
+    field(INP,  "@devBergozBCM.proto getAdc $(PORT)")
     field (SCAN, "I/O Intr")
+}
+
+record(bo, "$(P)$(R)READ_PARMS")
+{
+    field(DESC, "Reads all Bergoz params")
+    field(DTYP, "stream")
+    field(OUT,  "@devBergozBCM.proto readParms $(PORT_OUT)")
+    field(PINI, "YES")
 }
 
 record(longin, "$(P)$(R)SERIALNUM_RD")
 {
     field(DESC, "Read BERGOZ serial number")
     field(DTYP, "stream")
-    field(INP,  "@devBergozBCM.proto getSerial $(PORT) $(A)")
+    field(INP,  "@devBergozBCM.proto getSerial $(PORT)")
     field(SCAN, "I/O Intr")
     field(HSV,  "MINOR")
     field(LSV,  "MINOR")
@@ -30,7 +44,7 @@ record(longout, "$(P)$(R)SERIALNUM_UPDATE")
 {
     field(DESC, "Update BERGOZ serial number")
     field(DTYP, "stream")
-    field(OUT,  "@devBergozBCM.proto updateSerial $(PORT) $(A)")
+    field(OUT,  "@devBergozBCM.proto updateSerial $(PORT_OUT)")
     field(SCAN, "Passive")
 }
 
@@ -38,15 +52,16 @@ record(longin, "$(P)$(R)DELAY_RD")
 {
     field(DESC, "Get digital delay value")
     field(DTYP, "stream")
-    field(INP,  "@devBergozBCM.proto getDelay $(PORT) $(A)")
+    field(INP,  "@devBergozBCM.proto getDelay $(PORT)")
     field(SCAN, "I/O Intr")
+    field(PINI, "YES")
 }
 
 record(longout, "$(P)$(R)DELAY_WR")
 {
     field(DESC, "Set digital delay value")
     field(DTYP, "stream")
-    field(OUT,  "@devBergozBCM.proto setDelay $(PORT) $(A)")
+    field(OUT,  "@devBergozBCM.proto setDelay $(PORT_OUT)")
     field(SCAN, "Passive")
     info(autosaveFields,"VAL")
 }
@@ -55,7 +70,7 @@ record(longin, "$(P)$(R)REVERSE_RD")
 {
     field(DESC, "Is reverse func activated")
     field(DTYP, "stream")
-    field(INP,  "@devBergozBCM.proto getReverse $(PORT) $(A)")
+    field(INP,  "@devBergozBCM.proto getReverse $(PORT)")
     field(SCAN, "I/O Intr")
 }
 
@@ -63,7 +78,7 @@ record(longin, "$(P)$(R)SWITCHES_RD")
 {
     field(DESC, "Get switches position")
     field(DTYP, "stream")
-    field(INP,  "@devBergozBCM.proto getSwitches $(PORT) $(A)")
+    field(INP,  "@devBergozBCM.proto getSwitches $(PORT)")
     field(SCAN, "I/O Intr")
 }
 
@@ -71,7 +86,7 @@ record(longout, "$(P)$(R)SWITCHES_WR")
 {
     field(DESC, "Set switches position")
     field(DTYP, "stream")
-    field(OUT,  "@devBergozBCM.proto setSwitches $(PORT) $(A)")
+    field(OUT,  "@devBergozBCM.proto setSwitches $(PORT_OUT)")
     field(SCAN, "Passive")
     info(autosaveFields,"VAL")
 }
@@ -80,21 +95,21 @@ record(longin, "$(P)$(R)AVGPOINTS_RD")
 {
     field(DESC, "average number of points")
     field(DTYP, "stream")
-    field(INP,  "@devBergozBCM.proto getAvgPoints $(PORT) $(A)")
+    field(INP,  "@devBergozBCM.proto getAvgPoints $(PORT)")
     field(SCAN, "I/O Intr")
 }
 
 record(longin, "$(P)$(R)CCALHI_RD")
 {
     field(DTYP, "stream")
-    field(INP,  "@devBergozBCM.proto getQcalHi $(PORT) $(A)")
+    field(INP,  "@devBergozBCM.proto getQcalHi $(PORT)")
     field(SCAN, "I/O Intr")
 }
 
 record(longin, "$(P)$(R)CCALLO_RD")
 {
     field(DTYP, "stream")
-    field(INP,  "@devBergozBCM.proto getQcalLo $(PORT) $(A)")
+    field(INP,  "@devBergozBCM.proto getQcalLo $(PORT)")
     field(SCAN, "I/O Intr")
 }
 
@@ -119,14 +134,14 @@ record(calc,"$(P)$(R)CCAL_RD") {
 record(longin, "$(P)$(R)VCALHI_RD")
 {
     field(DTYP, "stream")
-    field(INP,  "@devBergozBCM.proto getUcalHi $(PORT) $(A)")
+    field(INP,  "@devBergozBCM.proto getUcalHi $(PORT)")
     field(SCAN, "I/O Intr")
 }
 
 record(longin, "$(P)$(R)VCALLO_RD")
 {
     field(DTYP, "stream")
-    field(INP,  "@devBergozBCM.proto getUcalLo $(PORT) $(A)")
+    field(INP,  "@devBergozBCM.proto getUcalLo $(PORT)")
     field(SCAN, "I/O Intr")
 }
 
