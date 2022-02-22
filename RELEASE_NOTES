@@ -1,4 +1,4 @@
-R2.0.1:  feb/22/2022 Marcio Donadio
+R2.0.2:  feb/22/2022 Marcio Donadio
          - Upgraded asyn/R4.39-1.0.1 and streamdevice/R2.8.9-1.2.1 only for the
            IOC application example as the main module doens't need asyn or
            stream device.
